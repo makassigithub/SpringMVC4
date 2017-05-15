@@ -1,0 +1,39 @@
+<web-app xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+	      http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	version="3.0">
+	<!-- Find the Config with web.xml drafted in ressources/template -->
+	<!-- If we choose to go without web.xml, we even delete the WEB-INF and 
+		its content we just need to create an initializer class that extends the 
+		WebApplication initializer class and overide the onStartup method in the 
+		top package See WebApplicationInitializer in com.makas -->
+
+	<display-name>Climate tracker Web Application</display-name>
+
+	<!-- define the dispatcher servlet that is the front end manager -->
+	<servlet>
+		<servlet-name>climateTrackerServlet</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<!-- we will have 2 init params tags -->
+
+		<!-- one for the context class location within spring -->
+
+		<init-param>
+			<param-name>contextClass</param-name>
+			<param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext</param-value>
+		</init-param>
+		<!-- the second one for the java config location -->
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>com.makas.WebConfig</param-value>
+		</init-param>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>climateTrackerServlet</servlet-name>
+		<url-pattern>*.html</url-pattern>
+		<url-pattern>*.pdf</url-pattern>
+		<url-pattern>*.json</url-pattern>
+	</servlet-mapping>
+		
+</web-app>
